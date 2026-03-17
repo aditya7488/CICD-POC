@@ -18,4 +18,3 @@ def test_api_reachable():
     r = urllib.request.urlopen("https://httpbin.org/get")
     assert r.status == 200
 ```
-```

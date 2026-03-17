@@ -66,17 +66,3 @@ jobs:
             exit 1
           fi
           echo "All jobs passed — Pipeline GREEN"
-```
-```
-Commit message: feat: add GitHub Actions pipeline YAML
-Click: Commit changes  ✅
-```
-
----
-
-## After Commit — Immediately Click the "Actions" Tab
-```
-You are here now:
-aditya7488 / CICD-POC
-
-Click: Actions  (in the top menu bar next to Code, Issues, Pull requests)

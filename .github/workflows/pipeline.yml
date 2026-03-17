@@ -36,20 +36,18 @@ jobs:
 
   sap-tosca-tests:
     name: SAP — Tosca placeholder
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, tosca-runner]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Tosca placeholder
-        run: |
-          echo "========================================"
-          echo "  SAP Tosca — placeholder active"
-          echo "  Windows self-hosted runner"
-          echo "  will be connected next"
-          echo "========================================"
-
+    - name: Tosca execution (placeholder)
+      run: |
+        echo "========================================"
+        echo "  Running on SELF-HOSTED WINDOWS"
+        echo "  Tosca execution will happen here"
+        echo "========================================"
   quality-gate:
     name: Quality Gate
     runs-on: ubuntu-latest

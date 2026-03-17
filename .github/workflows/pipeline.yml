@@ -1,0 +1,82 @@
+name: SAPOCOM CI-CD POC Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+
+  non-sap-tests:
+    name: Non-SAP — Python pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run non-SAP tests
+        run: pytest scripts/non-sap/test_sample.py -v
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: non-sap-results
+          path: reports/
+
+  sap-tosca-tests:
+    name: SAP — Tosca placeholder
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Tosca placeholder
+        run: |
+          echo "========================================"
+          echo "  SAP Tosca — placeholder active"
+          echo "  Windows self-hosted runner"
+          echo "  will be connected next"
+          echo "========================================"
+
+  quality-gate:
+    name: Quality Gate
+    runs-on: ubuntu-latest
+    needs: [non-sap-tests, sap-tosca-tests]
+    if: always()
+
+    steps:
+      - name: Evaluate results
+        run: |
+          echo "Non-SAP  : ${{ needs.non-sap-tests.result }}"
+          echo "SAP Tosca: ${{ needs.sap-tosca-tests.result }}"
+          if [[ "${{ needs.non-sap-tests.result }}" == "failure" ]]; then
+            echo "FAILED — pipeline blocked"
+            exit 1
+          fi
+          echo "All jobs passed — Pipeline GREEN"
+```
+```
+Commit message: feat: add GitHub Actions pipeline YAML
+Click: Commit changes  ✅
+```
+
+---
+
+## After Commit — Immediately Click the "Actions" Tab
+```
+You are here now:
+aditya7488 / CICD-POC
+
+Click: Actions  (in the top menu bar next to Code, Issues, Pull requests)

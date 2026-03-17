@@ -36,7 +36,7 @@ jobs:
 
   sap-tosca-tests:
     name: SAP — Tosca placeholder
-    runs-on: [self-hosted, tosca-runner]
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code
